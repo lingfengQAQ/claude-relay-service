@@ -14,10 +14,9 @@
     "NODE_ENV": "production",
     "VERCEL": "1"
   },
-  "regions": ["sin1", "hkg1"],
   "functions": {
     "src/index.js": {
-      "maxDuration": 60,
+      "maxDuration": 10,
       "memory": 1024
     }
   }
