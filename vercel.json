@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "src/app.js",
+      "src": "src/index.js",
       "use": "@vercel/node"
     }
   ],
@@ -13,15 +13,16 @@
     },
     {
       "src": "/(.*)",
-      "dest": "/src/app.js"
+      "dest": "/src/index.js"
     }
   ],
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "VERCEL": "1"
   },
   "regions": ["sin1", "hkg1"],
   "functions": {
-    "src/app.js": {
+    "src/index.js": {
       "maxDuration": 60,
       "memory": 1024
     }
