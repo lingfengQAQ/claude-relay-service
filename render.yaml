@@ -1,0 +1,46 @@
+services:
+  # Web Service
+  - type: web
+    name: claude-relay-service
+    env: node
+    region: singapore
+    plan: free
+    buildCommand: npm install
+    startCommand: node src/app.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: ADMIN_USERNAME
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      - key: SESSION_SECRET
+        sync: false
+      - key: REDIS_HOST
+        fromService:
+          type: redis
+          name: claude-relay-redis
+          property: host
+      - key: REDIS_PORT
+        fromService:
+          type: redis
+          name: claude-relay-redis
+          property: port
+      - key: REDIS_PASSWORD
+        fromService:
+          type: redis
+          name: claude-relay-redis
+          property: password
+      - key: UPSTASH_REDIS_REST_URL
+        sync: false
+      - key: UPSTASH_REDIS_REST_TOKEN
+        sync: false
+
+  # Redis Service (Free plan)
+  - type: redis
+    name: claude-relay-redis
+    region: singapore
+    plan: free
+    maxmemoryPolicy: noeviction
